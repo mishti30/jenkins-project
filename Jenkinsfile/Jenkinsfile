@@ -19,6 +19,5 @@ pipeline {
                 sh "docker -dit --name web -p 8089:80 myphpimg:latest"
             }
         }
-
-
+    }
 }
