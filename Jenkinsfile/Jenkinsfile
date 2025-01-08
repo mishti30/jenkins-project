@@ -11,13 +11,13 @@ pipeline {
         }
         stage("build Image") { 
             steps {
-                
+
                 sh "docker build -t myphpimg:latest ."
             }
         }
         stage("Container Create") {
             steps {
-                sh "docker -dit --name web -p 8089:80 myphpimg:latest"
+                sh "docker run -dit --name web -p 8089:80 myphpimg:latest"
             }
         }
     }
