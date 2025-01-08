@@ -1,0 +1,24 @@
+pipeline {
+    agent {
+        label 'agent1'
+    }
+  
+    stages { 
+        stage("checkout scm") {
+            steps {
+                git url:"https://github.com/mishti30/jenkins-project.git", branch: "main"
+            }
+        }
+        stage("build Image") { 
+            steps {
+                sh "docker build -t myphpimg:latest ."
+            }
+        }
+        stage("Container Create") {
+            steps {
+                sh "docker -dit --name web -p 8089:80 myphpimg:latest"
+            }
+        }
+
+
+}
