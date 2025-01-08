@@ -6,7 +6,7 @@ pipeline {
     stages { 
         stage("checkout scm") {
             steps {
-                git url:"https://github.com/mishti30/jenkins-project.git", branch: "main"
+                git url:"git@github.com:mishti30/jenkins-project.git", branch: "main"
             }
         }
         stage("build Image") { 
