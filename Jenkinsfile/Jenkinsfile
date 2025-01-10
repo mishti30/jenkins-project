@@ -1,24 +1,31 @@
-pipeline {
+pipeline { 
     agent {
         label 'agent1'
     }
-  
-    stages { 
-        stage("checkout scm") {
-            steps {
-                git url:"git@github.com:mishti30/jenkins-project.git", branch: "main"
-            }
+     
+    stages {
+      stage("checkout scm") {
+        steps {
+          git branch: 'terraform', url: 'https://github.com/mishti30/jenkins-project.git'
         }
-        stage("build Image") { 
-            steps {
+      }
 
-                sh "docker build -t myphpimg:latest ."
-            }
+      stage("terraform Init"){
+        steps { 
+            sh 'terraform init'
         }
-        stage("Container Create") {
-            steps {
-                sh "docker run -dit --name web -p 8089:80 myphpimg:latest"
-            }
+      }
+
+      stage("terraform plan"){
+        steps {
+            sh 'terraform plan'
         }
+      } 
+
+      stage("terraform apply") { 
+        steps { 
+            sh 'terraform apply --auto-approve'
+        }
+      }
     }
 }
