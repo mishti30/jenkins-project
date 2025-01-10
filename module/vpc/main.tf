@@ -31,3 +31,12 @@ resource "aws_subnet" "subnet3" {
     Name = "Terraform_jenkins_subnet3"
   }
 }
+
+resource "aws_subnet" "subnet4" {
+  cidr_block =  var.subnet_cidr[3]
+  vpc_id = aws_vpc.main.id
+  availability_zone = var.subner_az[0]
+  tags = {
+    Name = "Terraform_jenkins_subnet4"
+  }
+}
